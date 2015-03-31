@@ -6,9 +6,9 @@ var weather = function(url, q, date, callbackFunction){
 		format: 'json',
 		num_of_days: 1,
 		q: q,
-		date: date }
+		date: date };
 
 		request({url: url, qs: requestParams}, callbackFunction);
-}
+};
 
 module.exports = weather;

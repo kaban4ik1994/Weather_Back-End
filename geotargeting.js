@@ -7,6 +7,6 @@ var geotargeting = function(url, latlng, callbackFunction){
 		sensor: false };
 
 		request({url: url, qs: requestParams}, callbackFunction);
-}
+};
 
 module.exports = geotargeting;
