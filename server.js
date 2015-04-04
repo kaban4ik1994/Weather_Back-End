@@ -1,5 +1,3 @@
-var baseUrlApiWeather = 'http://api.worldweatheronline.com/free/v2/weather.ashx';
-var baseUrlApiGeotargeting = 'http://maps.googleapis.com/maps/api/geocode/json';
 
 var express = require('express');
 var app = express();
@@ -7,12 +5,17 @@ var request = require('request');
 var weather = require('./weather');
 var geotargeting = require('./geotargeting');
 
-app.get('/Weather', function(req, res){
+function setResHeader(req, res, next){
 	res.header('Content-Type", "application/json');
 	res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
+	next();
+}
 
-	weather(baseUrlApiWeather, req.query.latitude + ',' + req.query.longitude, req.query.date,
+app.get('/*', setResHeader);
+
+app.get('/Weather', function(req, res){
+	weather(req.query.latitude + ',' + req.query.longitude, req.query.date, '70388b130b191be8c6a64da274a27',
      function(error, response, body){
 		if (!error && response.statusCode === 200) {
 			res.send(body); }
@@ -23,15 +26,7 @@ app.get('/Weather', function(req, res){
 });
 
 app.get('/Location', function(req, res){
-	res.header('Content-Type', 'application/json');
-	res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'X-Requested-With');
-	var requestParams = {
-		latlng: req.query.latitude + ',' + req.query.longitude,
-		language: 'EN', 
-		sensor: false };
-
-	geotargeting(baseUrlApiGeotargeting, req.query.latitude + ',' + req.query.longitude,
+	geotargeting(req.query.latitude + ',' + req.query.longitude,
 	 function(error, response, body){
     		if (!error && response.statusCode === 200) {
     		res.send(body); }

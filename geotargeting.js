@@ -1,12 +1,13 @@
+var baseUrlApiGeotargeting = 'http://maps.googleapis.com/maps/api/geocode/json';
 var request = require('request');
 
-var geotargeting = function(url, latlng, callbackFunction){
+var geotargeting = function(latlng, callbackFunction){
 		var requestParams = {
 		latlng: latlng,
 		language: 'EN', 
 		sensor: false };
 
-		request({url: url, qs: requestParams}, callbackFunction);
+		request({url: baseUrlApiGeotargeting, qs: requestParams}, callbackFunction);
 };
 
 module.exports = geotargeting;
