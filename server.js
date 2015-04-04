@@ -41,5 +41,4 @@ app.get('/Location', function(req, res){
 	});
 });
 
-app.listen(1337, function(){
-});
+app.listen(1337);
