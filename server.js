@@ -1,9 +1,8 @@
 
 var express = require('express');
 var app = express();
-var request = require('request');
-var weather = require('./weather');
-var geotargeting = require('./geotargeting');
+var weather = require('worldweatheronline-node-module');
+var geotargeting = require('google-geotargeting-node-module');
 
 function setResHeader(req, res, next) {
     res.header('Content-Type", "application/json');

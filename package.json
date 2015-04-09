@@ -1,24 +1,25 @@
 {
-  "name": "weather-api",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node server.js"
-  },
-  "devDependencies" :{
-    "grunt": "latest",
-    "grunt-contrib-jshint": "latest",
-    "grunt-contrib-concat": "latest",
-    "grunt-contrib-uglify": "latest",
-    "grunt-contrib-cssmin": "latest",
-    "grunt-contrib-watch": "latest",
-    "grunt-remove-logging": "latest",
-    "grunt-jscs": "latest"
+    "name": "weather-api",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node server.js"
     },
-  "dependencies": {
-    "express": "*",
-    "jade": "*",
-    "mongodb": "*",
-    "request": "^2.54.0"
-  }
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-contrib-jshint": "latest",
+        "grunt-contrib-concat": "latest",
+        "grunt-contrib-uglify": "latest",
+        "grunt-contrib-cssmin": "latest",
+        "grunt-contrib-watch": "latest",
+        "grunt-remove-logging": "latest",
+        "grunt-jscs": "latest"
+    },
+    "dependencies": {
+        "express": "*",
+        "jade": "*",
+        "mongodb": "*",
+        "worldweatheronline-node-module": "latest",
+        "google-geotargeting-node-module":  "latest"
+    }
 }
