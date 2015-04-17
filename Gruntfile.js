@@ -1,90 +1,90 @@
 module.exports = function (grunt) {
-	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
-		
-		jshint: {
-			options:{
-				force: true,
-				curly: true,
-				eqeqeq: true,
-				immed: true,
-				latedef: true,
-				newcap: true,
-				noarg: true,
-				sub: true,
-				undef: true,
-				eqnull: true,
-				browser: true,
-				globals: {
-					jQuery: true,
-					$: true,
-					console: true
-				}
-			},
-			'<%= pkg.name %>':{
-				src: ['*.js']
-			}
-		},
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
 
-		jscs: {
-			
-		},
+        jshint: {
+            options: {
+                force: true,
+                curly: true,
+                eqeqeq: true,
+                immed: true,
+                latedef: true,
+                newcap: true,
+                noarg: true,
+                sub: true,
+                undef: true,
+                eqnull: true,
+                browser: true,
+                globals: {
+                    jQuery: true,
+                    $: true,
+                    console: true
+                }
+            },
+            '<%= pkg.name %>': {
+                src: ['*.js']
+            }
+        },
 
-		concat: {
+        jscs: {
 
-			dist: {
-				src: ['server.js', 'weather.js', 'geotargeting.js'],
-				dest: 'build.js'
-			},
-		},
-		
-		uglify: {
-			options: {
-				stripBanners: true,
-				banner: '/* <%= pkg.name %> <%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-			},
+        },
 
-			build: {
-				src: 'build.js',
-				dest: 'build.min.js'
-			}
-		},
+        concat: {
 
-		cssmin: {
-			with_banner: {
-				options: {
-					banner: '/* CSS */'
-				},
+            dist: {
+                src: ['server.js'],
+                dest: 'build.js'
+            },
+        },
 
-				files: {
+        uglify: {
+            options: {
+                stripBanners: true,
+                banner: '/* <%= pkg.name %> <%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+            },
 
-				}
-			}
-		},
+            build: {
+                src: 'build.js',
+                dest: 'build.min.js'
+            }
+        },
 
-		watch: {
-			scripts: {
-				files: '*.js',
-				tasks: ['jshint', 'concat', 'uglify', 'cssmin'],
-				options: {
-				    livereload: true
-				},
-			}
-		},
+        cssmin: {
+            with_banner: {
+                options: {
+                    banner: '/* CSS */'
+                },
 
-		removelogging: {
-			files: {
-				'build.min.js':'build.min.js'
-			}
-		}
+                files: {
 
-	});
+                }
+            }
+        },
 
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-remove-logging');
-	grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'cssmin', 'watch', 'removelogging']);
+        watch: {
+            scripts: {
+                files: '*.js',
+                tasks: ['jshint', 'concat', 'uglify', 'cssmin'],
+                options: {
+                    livereload: true
+                },
+            }
+        },
+
+        removelogging: {
+            files: {
+                'build.min.js': 'build.min.js'
+            }
+        }
+
+    });
+
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-remove-logging');
+    grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'cssmin', 'watch', 'removelogging']);
 };

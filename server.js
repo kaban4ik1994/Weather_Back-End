@@ -4,8 +4,13 @@ var app = express();
 var weather = require('worldweatheronline-node-module');
 var geotargeting = require('google-geotargeting-node-module');
 
+var config = require('nconf');
+config.argv()
+  .env()
+  .file({ file: './config.json' });
+
 function setResHeader(req, res, next) {
-    res.header('Content-Type", "application/json');
+    res.header('Content-Type', 'application/json');
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'X-Requested-With');
     next();
@@ -15,7 +20,7 @@ app.get('/*', setResHeader);
 
 app.get('/Weather', function (req, res) {
     weather({
-        key: '70388b130b191be8c6a64da274a27',
+        key: config.get('weather-key'),
         q: req.query.latitude + ',' + req.query.longitude,
         date: req.query.date,
     }, function (error, response, body) {
@@ -41,4 +46,4 @@ app.get('/Location', function (req, res) {
     });
 });
 
-app.listen(1337);
+app.listen(config.get('port'));

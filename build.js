@@ -4,6 +4,11 @@ var app = express();
 var weather = require('worldweatheronline-node-module');
 var geotargeting = require('google-geotargeting-node-module');
 
+var config = require('nconf');
+config.argv()
+  .env()
+  .file({ file: './config.json' });
+
 function setResHeader(req, res, next) {
     res.header('Content-Type", "application/json');
     res.header('Access-Control-Allow-Origin', '*');
@@ -15,16 +20,15 @@ app.get('/*', setResHeader);
 
 app.get('/Weather', function (req, res) {
     weather({
-        key: '70388b130b191be8c6a64da274a27',
+        key: config.get('weather-key'),
         q: req.query.latitude + ',' + req.query.longitude,
         date: req.query.date,
-        callbackFunction: function (error, response, body) {
-            if (!error && response.statusCode === 200) {
-                res.send(body);
-            }
-            else {
-                res.status(400).send('Error');
-            }
+    }, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            res.send(body);
+        }
+        else {
+            res.status(400).send('Error');
         }
     });
 });
@@ -32,16 +36,14 @@ app.get('/Weather', function (req, res) {
 app.get('/Location', function (req, res) {
     geotargeting({
         latlng: req.query.latitude + ',' + req.query.longitude,
-        callbackFunction: function (error, response, body) {
-            if (!error && response.statusCode === 200) {
-                res.send(body);
-            }
-            else {
-                res.status(400).send('Error');
-            }
+    }, function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            res.send(body);
         }
-    }
-);
+        else {
+            res.status(400).send('Error');
+        }
+    });
 });
 
-app.listen(1337);
+app.listen(config.get('port'));

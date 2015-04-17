@@ -19,7 +19,8 @@
         "express": "*",
         "jade": "*",
         "mongodb": "*",
+        "nconf": "*",
         "worldweatheronline-node-module": "latest",
-        "google-geotargeting-node-module":  "latest"
+        "google-geotargeting-node-module": "latest"
     }
 }
