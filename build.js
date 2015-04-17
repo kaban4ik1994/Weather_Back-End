@@ -18,12 +18,13 @@ app.get('/Weather', function (req, res) {
         key: '70388b130b191be8c6a64da274a27',
         q: req.query.latitude + ',' + req.query.longitude,
         date: req.query.date,
-    }, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            res.send(body);
-        }
-        else {
-            res.status(400).send('Error');
+        callbackFunction: function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                res.send(body);
+            }
+            else {
+                res.status(400).send('Error');
+            }
         }
     });
 });
@@ -31,14 +32,16 @@ app.get('/Weather', function (req, res) {
 app.get('/Location', function (req, res) {
     geotargeting({
         latlng: req.query.latitude + ',' + req.query.longitude,
-    }, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
-            res.send(body);
+        callbackFunction: function (error, response, body) {
+            if (!error && response.statusCode === 200) {
+                res.send(body);
+            }
+            else {
+                res.status(400).send('Error');
+            }
         }
-        else {
-            res.status(400).send('Error');
-        }
-    });
+    }
+);
 });
 
 app.listen(1337);
