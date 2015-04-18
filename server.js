@@ -23,6 +23,7 @@ app.get('/Weather', function (req, res) {
         key: config.get('weather-key'),
         q: req.query.latitude + ',' + req.query.longitude,
         date: req.query.date,
+        num_of_days: req.query.numOfDays,
     }, function (error, response, body) {
         if (!error && response.statusCode === 200) {
             res.send(body);
